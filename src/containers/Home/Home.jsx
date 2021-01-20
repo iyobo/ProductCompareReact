@@ -1,30 +1,33 @@
 import React, { Component } from "react";
-import { bindActionCreators } from "redux";
 import { CompareTable, ProductList } from "../../components";
-import * as productActions from "../../actions/product";
-import { connect } from "react-redux";
+import results from "../../data/products.json";
 
 class Home extends Component {
   constructor() {
     super();
     this.state = {
       nameSearch: "",
+      products: results.products,
     };
   }
 
-  componentWillMount() {
-    const { actions } = this.props;
-    actions.productActions.getProducts();
-  }
-
-  handleChange = (event) => {
-    this.setState({ nameSearch: event.target.value });
-  };
-
   render() {
-    const { nameSearch } = this.state;
-    const { products, actions } = this.props;
-    const compareProducts = products.filter((product) => product.compare);
+    const compareProducts = this.state.products.filter(
+      (product) => product.compare
+    );
+    const handleChange = (event) => {
+      this.setState({ nameSearch: event.target.value });
+    };
+
+    const compare = (id) => {
+      this.setState({
+        products: this.state.products.map((product) =>
+          product.id === id
+            ? { ...product, compare: !product.compare }
+            : product
+        ),
+      });
+    };
 
     return (
       <div className="home mt-5">
@@ -35,14 +38,14 @@ class Home extends Component {
               type="text"
               placeholder="Search by name"
               value={this.state.nameSearch}
-              onChange={(e) => this.handleChange(e)}
+              onChange={(e) => handleChange(e)}
             />
           </div>
         </div>
         <ProductList
-          products={products}
-          nameSearch={nameSearch}
-          compare={actions.productActions.compare}
+          products={this.state.products}
+          nameSearch={this.state.nameSearch}
+          compare={compare}
         />
         {compareProducts.length >= 1 && (
           <CompareTable products={compareProducts} />
@@ -52,13 +55,4 @@ class Home extends Component {
   }
 }
 
-export default connect(
-  (state) => ({
-    products: state.product,
-  }),
-  (dispatch) => ({
-    actions: {
-      productActions: bindActionCreators(productActions, dispatch),
-    },
-  })
-)(Home);
+export default Home;

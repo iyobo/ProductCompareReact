@@ -6,7 +6,8 @@
       "price": "$1.99",
       "colors": ["red", "green", "blue"],
       "condition": "Fresh",
-      "description": "Two Cherries"
+      "description": "Two Cherries",
+      "compare": false
     },
     {
       "id": "2",
@@ -15,7 +16,8 @@
       "price": "$2.99",
       "colors": ["green", "blue"],
       "condition": "Frozen",
-      "description": "Giant Orange"
+      "description": "Giant Orange",
+      "compare": false
     },
     {
       "id": "3",
@@ -24,7 +26,8 @@
       "price": "$1.00",
       "colors": ["red"],
       "condition": "Frozen",
-      "description": "Mixed Nuts"
+      "description": "Mixed Nuts",
+      "compare": false
     },
     {
       "id": "4",
@@ -33,7 +36,8 @@
       "price": "$1.49",
       "colors": ["blue"],
       "condition": "Fresh",
-      "description": "Just Strawberry"
+      "description": "Just Strawberry",
+      "compare": false
     }
   ]
 }
