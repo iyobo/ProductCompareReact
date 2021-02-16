@@ -13,8 +13,8 @@ const ProductList = ({ products, compare, nameSearch }) => {
     if(!nameSearch) {
       setDisplayedProducts(products)
     }else {
-      //filter when namesearch changes
-      const newItems = displayedProducts.filter((it) => it.name.toLowerCase().indexOf(nameSearch.toLowerCase()>-1) || it.description.toLowerCase().includes(nameSearch.toLowerCase()));
+      //filter when namesearch changes. (Binary search tree preferred. no time)
+      const newItems = displayedProducts.filter((it) => it.name.toLowerCase().includes(nameSearch.toLowerCase()) || it.description.toLowerCase().includes(nameSearch.toLowerCase()));
       setDisplayedProducts(newItems);
     }
   }, [nameSearch]);
